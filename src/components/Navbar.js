@@ -19,12 +19,7 @@ const Navbar = () => {
                         <li className="nav-item">
                             <Link className="nav-link" to="#">Join WhatTheBug</Link>
                         </li>
-                    </ul>
-                    <div className="d-flex nav-item ">
-                        <p className='nav-link'>Kills : 6</p>
-                        <Link className='nav-link' to={"/"}>Account</Link>
-                    </div>   
-                   
+                    </ul>                  
                 </div>
 
             </div>
