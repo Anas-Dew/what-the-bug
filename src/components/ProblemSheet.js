@@ -3,11 +3,16 @@ import { Link } from 'react-router-dom'
 import Footer from './Footer'
 import Filters from './platform_components/Filters'
 const ProblemSheet = () => {
+    // eslint-disable-next-line 
+    const getProblemList = async() => {
+
+    }
+    
     return (
         <div className='m-5'>
             <h2>Practice from the problems below.</h2>
             {/* DROP DOWN MENU FOR FILTERS */}
-            <Filters/>
+            {/* <Filters/> */}
             <table className="table">
                 <thead style={{backgroundColor: "#ececec"}}>
                     <tr>
@@ -20,7 +25,7 @@ const ProblemSheet = () => {
                 <tbody>
                     <tr>
                         <th scope="row">1</th>
-                        <td>Two Sum</td>
+                        <td><Link to={'/practice'}>Two Sum</Link></td>
                         <td>Array</td>
                         <td>Easy</td>
                     </tr>
@@ -40,7 +45,7 @@ const ProblemSheet = () => {
             </table>
 
             <Footer/>
-            <button className='btn btn-primary'><Link style={{ color: "white" }} to={"/practice"}>Practice</Link></button>
+            <button className='btn btn-primary'><Link style={{ color: "white" }} to={"/practice"}>Contribute A Problem</Link></button>
         </div>
     )
 }
