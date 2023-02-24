@@ -32,7 +32,7 @@ if __name__ == "__main__":
     const [Output, setOutput] = useState('')
     const [CurrentCode, setCurrentCode] = useState(problem_response.bug_code)
 
-    const codeProcessor = async (url = 'http://anasdew.pythonanywhere.com/execute', code) => {
+    const codeProcessor = async (url = 'https://anasdew.pythonanywhere.com/execute', code) => {
         // eslint-disable-next-line
         const response = await fetch(url, {
             method: 'POST',
@@ -48,21 +48,25 @@ if __name__ == "__main__":
                 data => {
                     let response = data;
                     console.log(response);
-                    setOutput(response['output'].toString().slice(2, -1).replace(/\\n/g, "\n"))
+                    let newOutput = response['output'].toString().slice(2, -1).replace(/\\n/g, "\n")
+                    setOutput(newOutput)
 
                     // ON PASS, REDIRECT.
-                    // if (Output.replace(/\s+/g, "").toLowerCase() === "pass") {
-                    //     console.log('lol');
-                    //     navigate('/success')
-                    // } else {
-                        
-                    // }
+                    const lol = newOutput.replace(/\s+/g, "").toLowerCase()
+                    if (lol === "pass") {
+                        document.getElementById('success-alert').style.display = "block"
+                        setTimeout(() => {
+                            navigate('/success')
+                        }, 3000)
+                    } else {
+
+                    }
                 }
             )
     }
     const sendCode = () => {
         console.log(CurrentCode);
-        codeProcessor('http://anasdew.pythonanywhere.com/execute', CurrentCode)
+        codeProcessor('https://anasdew.pythonanywhere.com/execute', CurrentCode)
     }
     const onChange = React.useCallback((value, viewUpdate) => {
         setCurrentCode(value)
@@ -85,6 +89,9 @@ if __name__ == "__main__":
 
     return (
         <div className='m-3'>
+            <div style={{display: "none"}} id="success-alert" className="alert alert-success" role="alert">
+                Congratulations buddy, you caught the bug!
+            </div>
             <div>
                 <h2>{problem_response.title}</h2>
                 <p>{problem_response.description}</p>

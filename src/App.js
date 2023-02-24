@@ -5,6 +5,7 @@ import Platform from './components/Platform';
 import ProblemSheet from './components/ProblemSheet';
 import Success from './components/Success';
 import React from 'react'
+import CodePlayground from './components/CodePlayground';
 function App() {
   return (
     <>
@@ -14,6 +15,7 @@ function App() {
           <Route exact path='/' element={<ProblemSheet />} />
           <Route exact path='/practice' element={<Platform />} />
           <Route exact path='/success' element={<Success />} />
+          <Route exact path='/playground' element={<CodePlayground/>} />
         </Routes>
       </Router>
     </>
