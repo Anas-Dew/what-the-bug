@@ -10,13 +10,13 @@ def index():
 
 @app.route('/execute', methods=['POST'])
 def execute_code():
-    code = request.get_json()
+    request = request.get_json()
 
     # Validate the code to make sure it is safe to execute
 
     # Use subprocess to execute the code
     import subprocess
-    result = subprocess.run(['python', '-c', code['code']],
+    result = subprocess.run(['python', '-c', request['code']],
                             stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
     # Return the output of the code execution to the frontend
