@@ -19,13 +19,13 @@ if __name__ == "__main__":
         print("Unit test failed")`
 
     let example = `def add_numbers(a, b):
-  return a + b
+  return a - b
     ` + nameAndmain
     // eslint-disable-next-line
     const getProblemDetails = async () => { }
     let problem_response = {
         "title": "Two Sum",
-        "description": "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. You may assume that each input would have exactly one solution, and you may not use the same element twice. You can return the answer in any order.",
+        "description": "This is an example description. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. You may assume that each input would have exactly one solution, and you may not use the same element twice. You can return the answer in any order.",
         "test_cases": { "case1": "solution1", "case2": "solution2", "case3": "solution3" },
         "bug_code": example
     }
@@ -66,6 +66,7 @@ if __name__ == "__main__":
     }
     const sendCode = () => {
         console.log(CurrentCode);
+        setOutput('Running...')
         codeProcessor('https://anasdew.pythonanywhere.com/execute', CurrentCode)
     }
     const onChange = React.useCallback((value, viewUpdate) => {
@@ -109,7 +110,7 @@ if __name__ == "__main__":
                 />
                 <div className='d-flex align-self-end'>
                     <button onClick={sendCode} style={{ bottom: '3rem', right: "1rem", position: 'relative' }} type="submit" className=" btn btn-secondary">Run</button>
-                    <button style={{ bottom: '3rem', right: "1rem", position: 'relative', marginLeft: "0.5rem" }} type="submit" className="btn btn-success"><Link style={{ color: "white" }} className="text-decoration-none" to={"/success"}>Submit</Link></button>
+                    <button onClick={sendCode} style={{ bottom: '3rem', right: "1rem", position: 'relative', marginLeft: "0.5rem" }} type="submit" className="btn btn-success"><Link style={{ color: "white" }} className="text-decoration-none" to={"/success"}>Submit</Link></button>
                 </div>
                 <div style={{ fontFamily: "monospace" }}>
                     Output : {Output}

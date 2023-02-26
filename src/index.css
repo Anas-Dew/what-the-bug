@@ -16,3 +16,16 @@ h1, h2, h3, h4, h5, h6 {
 .filter-buttons {
   margin: 1rem;
 }
+
+
+/* NOT FOUND PAGE CONTENT */
+#not-found-paragraph {
+  width: 70%;
+  margin-top: 1rem;
+}
+
+@media screen and (max-width: 480px) {
+  #not-found-paragraph {
+    width: 85%;
+  }
+}

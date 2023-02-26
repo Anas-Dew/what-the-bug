@@ -6,16 +6,18 @@ import ProblemSheet from './components/ProblemSheet';
 import Success from './components/Success';
 import React from 'react'
 import CodePlayground from './components/CodePlayground';
+import NotFound from './components/NotFound'
 function App() {
   return (
     <>
       <Router>
         <Navbar />
         <Routes>
+          <Route path='*' element={<NotFound />} />
           <Route exact path='/' element={<ProblemSheet />} />
           <Route exact path='/practice' element={<Platform />} />
           <Route exact path='/success' element={<Success />} />
-          <Route exact path='/playground' element={<CodePlayground/>} />
+          <Route exact path='/playground' element={<CodePlayground />} />
         </Routes>
       </Router>
     </>
