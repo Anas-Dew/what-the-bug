@@ -9,8 +9,13 @@ body {
   /* font-family: "Labrada"; */
 }
 
+#hero-heading {
+  font-family: 'Times New Roman', Times, serif;
+
+}
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Righteous';
+  /* font-family: 'Righteous'; */
+  font-family: 'Times New Roman', Times, serif;
 }
 
 .filter-buttons {
@@ -28,4 +33,38 @@ h1, h2, h3, h4, h5, h6 {
   #not-found-paragraph {
     width: 85%;
   }
+}
+
+/* # TEST CASES */
+#test-case-button-div > button{
+  border: 0;
+  margin-left: 1rem;
+  border-radius: 10px;
+
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+
+ /* # MISC */
+ .test_button:hover {
+  color: white;
+  display: inline-block; /* Inline elements with width and height. TL;DR they make the icon buttons stack from left-to-right instead of top-to-bottom */
+  position: relative; /* All 'absolute'ly positioned elements are relative to this one */
+  padding: 2px 5px; /* Add some padding so it looks nice */
+}
+ /* Make the badge float in the top right corner of the button */
+.button__badge {
+  background-color: #d1d1d1;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  padding: 1px 5px;
+  font-size: 13px;
+  
+  position: absolute; /* Position the badge within the relatively positioned button */
+  top: 0;
+  right: 0;
 }

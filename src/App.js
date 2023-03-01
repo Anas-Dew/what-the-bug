@@ -8,6 +8,7 @@ import React from 'react'
 import CodePlayground from './components/CodePlayground';
 import NotFound from './components/NotFound'
 function App() {
+  // const problem_name = "hi"
   return (
     <>
       <Router>
@@ -15,7 +16,7 @@ function App() {
         <Routes>
           <Route path='*' element={<NotFound />} />
           <Route exact path='/' element={<ProblemSheet />} />
-          <Route exact path='/practice' element={<Platform />} />
+          <Route exact path={`/practice/:problem_name`} element={<Platform />} />
           <Route exact path='/success' element={<Success />} />
           <Route exact path='/playground' element={<CodePlayground />} />
         </Routes>

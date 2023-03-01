@@ -2,7 +2,6 @@ import React from 'react'
 import CodeMirror from '@uiw/react-codemirror';
 import { python } from '@codemirror/lang-python';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 
 const CodePlayground = () => {
     const [Output, setOutput] = useState('')
@@ -24,8 +23,12 @@ const CodePlayground = () => {
                 data => {
                     let response = data;
                     console.log(response);
-                    let newOutput = response['output'].toString().slice(2, -1).replace(/\\n/g, "\n")
-                    setOutput(newOutput)
+                    if (response['output'] === "The code has bugs.") {
+                        setOutput(response['output'])
+                    } else {
+                        let newOutput = response['output'].toString().slice(2, -1).replace(/\\n/g, "\n")
+                        setOutput(newOutput)
+                    }
 
                     // ON PASS, REDIRECT.
                     // const lol = newOutput.replace(/\s+/g, "").toLowerCase()
@@ -43,6 +46,7 @@ const CodePlayground = () => {
     const sendCode = () => {
         console.log(CurrentCode);
         codeProcessor('https://anasdew.pythonanywhere.com/execute', CurrentCode)
+        setOutput('Running...')
     }
     const onChange = React.useCallback((value, viewUpdate) => {
         setCurrentCode(value)

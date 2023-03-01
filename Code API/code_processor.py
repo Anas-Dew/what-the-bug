@@ -10,21 +10,23 @@ def index():
 
 @app.route('/execute', methods=['POST'])
 def execute_code():
-    request = request.get_json()
+    request_body = request.get_json()
 
     # Validate the code to make sure it is safe to execute
 
     # Use subprocess to execute the code
     import subprocess
-    result = subprocess.run(['python', '-c', request['code']],
+    result = subprocess.run(['python', '-c', request_body['code']],
                             stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
     # Return the output of the code execution to the frontend
+    exit_output = str(result.stdout)
+    if exit_output == "b''":
+        exit_output = "The code has bugs."
     response = {
-        "output" : str(result.stdout)
+        "output" : exit_output
     }
-    return  jsonify(response)
-    # return result.stdout
+    return jsonify(response)
 
 
 if __name__ == "__main__":

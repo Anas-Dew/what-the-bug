@@ -1,10 +1,12 @@
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useState } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { python } from '@codemirror/lang-python';
+import TestCase from './platform_components/TestCase';
 // import { solarizedLight, solarizedDark } from '@uiw/codemirror-theme-solarized';
 const Platform = (props) => {
+    const {problem_name} = useParams();
     const navigate = useNavigate();
     let nameAndmain = `
 if __name__ == "__main__":
@@ -24,7 +26,7 @@ if __name__ == "__main__":
     // eslint-disable-next-line
     const getProblemDetails = async () => { }
     let problem_response = {
-        "title": "Two Sum",
+        "title": problem_name,
         "description": "This is an example description. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. You may assume that each input would have exactly one solution, and you may not use the same element twice. You can return the answer in any order.",
         "test_cases": { "case1": "solution1", "case2": "solution2", "case3": "solution3" },
         "bug_code": example
@@ -48,19 +50,21 @@ if __name__ == "__main__":
                 data => {
                     let response = data;
                     console.log(response);
-                    let newOutput = response['output'].toString().slice(2, -1).replace(/\\n/g, "\n")
-                    setOutput(newOutput)
+                    if (response['output'] === "The code has bugs.") {
+                        setOutput(response['output'])
+                    } else {
+                        let newOutput = response['output'].toString().slice(2, -1).replace(/\\n/g, "\n")
+                        setOutput(newOutput)
+                        const lol = newOutput.replace(/\s+/g, "").toLowerCase()
+                        if (lol === "pass") {
+                            document.getElementById('success-alert').style.display = "block"
+                            setTimeout(() => {
+                                navigate('/success')
+                            }, 3000)
+                        } else { }
+                    }
 
                     // ON PASS, REDIRECT.
-                    const lol = newOutput.replace(/\s+/g, "").toLowerCase()
-                    if (lol === "pass") {
-                        document.getElementById('success-alert').style.display = "block"
-                        setTimeout(() => {
-                            navigate('/success')
-                        }, 3000)
-                    } else {
-
-                    }
                 }
             )
     }
@@ -90,7 +94,7 @@ if __name__ == "__main__":
 
     return (
         <div className='m-3'>
-            <div style={{display: "none"}} id="success-alert" className="alert alert-success" role="alert">
+            <div style={{ display: "none" }} id="success-alert" className="alert alert-success" role="alert">
                 Congratulations buddy, you caught the bug!
             </div>
             <div>
@@ -112,6 +116,7 @@ if __name__ == "__main__":
                     <button onClick={sendCode} style={{ bottom: '3rem', right: "1rem", position: 'relative' }} type="submit" className=" btn btn-secondary">Run</button>
                     <button onClick={sendCode} style={{ bottom: '3rem', right: "1rem", position: 'relative', marginLeft: "0.5rem" }} type="submit" className="btn btn-success"><Link style={{ color: "white" }} className="text-decoration-none" to={"/success"}>Submit</Link></button>
                 </div>
+                <TestCase/>
                 <div style={{ fontFamily: "monospace" }}>
                     Output : {Output}
                 </div>

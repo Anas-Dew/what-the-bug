@@ -25,7 +25,7 @@ const ProblemSheet = () => {
                 <tbody>
                     <tr>
                         <th scope="row">1</th>
-                        <td><Link to={'/practice'}>Two Sum</Link></td>
+                        <td><Link to={'/practice/two_sum'}>Two Sum</Link></td>
                         <td>Array</td>
                         <td>Easy</td>
                     </tr>
