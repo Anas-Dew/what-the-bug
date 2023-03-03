@@ -15,7 +15,7 @@ repo = g.get_repo(f'{owner}/{repo_name}')
 # def get_files(folder_path):
 
 
-@app.route('/get-files')
+@app.route('/get-all-files')
 def get_files():
     # Get the contents of the folder
     folder_contents = repo.get_contents('/Problems')
@@ -25,9 +25,9 @@ def get_files():
     return jsonify({"files": file_names})
 
 
-@app.route('/read-file/<folder>/<file_path>')
-def read_file(folder, file_path):
-    file_contents = repo.get_contents(f"{folder}/{file_path}")
+@app.route('/read-file/<folder>/<file_name>')
+def read_file(folder, file_name):
+    file_contents = repo.get_contents(f"{folder}/{file_name}")
     # Decode the file contents from base64
     base64_encoded_content = file_contents.content
     # decode the string

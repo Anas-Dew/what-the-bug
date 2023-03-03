@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@uiw/codemirror-theme-solarized": "^4.19.9",
     "@uiw/react-codemirror": "^4.19.9",
+    "buffer": "^6.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "^2.1.3",

@@ -10,9 +10,9 @@ const TestCase = (props) => {
         <button>+</button>
       </div>
       <div style={{ width: "25rem", marginLeft: "1rem" }} className="mt-4">
-        <div class="input-group">
-          <span style={{ height: "40px" }} class="input-group-text">nums=</span>
-          <textarea style={{ height: "40px" }} class="form-control" aria-label="Input">2, 2</textarea>
+        <div className="input-group">
+          <span style={{ height: "40px" }} className="input-group-text">nums=</span>
+          <textarea style={{ height: "40px" }} className="form-control" aria-label="Input">2, 2</textarea>
         </div>
       </div>
     </div>
@@ -23,15 +23,15 @@ const TestCase = (props) => {
 export default TestCase
 
 
-{/* <div class="test_button">
+{/* <div className="test_button">
           <button>Case 1</button>
-          <span onClick={()=> {removeCase(1)}} class="button__badge">x</span>
+          <span onClick={()=> {removeCase(1)}} className="button__badge">x</span>
         </div>
-        <div class="button">
+        <div className="button">
           <button>Case 2</button>
-          <span class="button__badge">x</span>
+          <span className="button__badge">x</span>
         </div>
-        <div class="button">
+        <div className="button">
           <button>Case 3</button>
-          <span class="button__badge">x</span>
+          <span className="button__badge">x</span>
         </div> */}

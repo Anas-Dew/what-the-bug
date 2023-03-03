@@ -16,7 +16,7 @@ function App() {
         <Routes>
           <Route path='*' element={<NotFound />} />
           <Route exact path='/' element={<ProblemSheet />} />
-          <Route exact path={`/practice/:problem_name`} element={<Platform />} />
+          <Route exact path={`/practice/:problem_unique_code`} element={<Platform />} />
           <Route exact path='/success' element={<Success />} />
           <Route exact path='/playground' element={<CodePlayground />} />
         </Routes>

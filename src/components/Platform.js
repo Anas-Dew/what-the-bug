@@ -3,28 +3,26 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { python } from '@codemirror/lang-python';
-import TestCase from './platform_components/TestCase';
-
+import { Buffer } from 'buffer';
 // import { solarizedLight, solarizedDark } from '@uiw/codemirror-theme-solarized';
 const Platform = (props) => {
     const [ResponseFromGithub, setRsponseFromGithub] = useState('')
-    const { problem_unique_code } = useParams();
-    const navigate = useNavigate();
+    const {problem_unique_code} = useParams();
+    var navigate = useNavigate();
  
-    useEffect(() => {
-        console.log('Component mounted!');
-        getCodeFromGithub('http://192.168.43.201:5000/read-file/Problems/two_sum.json')
-      }, []);
-
     let problem_response = {
-        "title": ResponseFromGithub.problem_name,
-        "description": "This is an example description. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. You may assume that each input would have exactly one solution, and you may not use the same element twice. You can return the answer in any order.",
-        "bug_code": ResponseFromGithub.problem_code
+        "title": ResponseFromGithub.problem_name || 'Foo Bar',
+        "description": ResponseFromGithub.problem_description || 'Lots of foo and lots of bar....',
+        "bug_code": Buffer.from(`${ResponseFromGithub.problem_code}`, 'base64').toString('utf-8') || "Nope",
+        "test_case": Buffer.from(`${ResponseFromGithub.test_case}`, 'base64').toString('utf-8') || "Pee"
     }
-    const [Output, setOutput] = useState('')
     const [CurrentCode, setCurrentCode] = useState(problem_response.bug_code)
-
-    const getCodeFromGithub = async (url = `http://192.168.43.201:5000/read-file/Problems/${problem_unique_code}.json`) => {
+    const [Output, setOutput] = useState('')
+    
+    useEffect(() => {
+        getCodeFromGithub(`http://192.168.43.201:5000/read-file/Problems/${problem_unique_code}.json`)
+      }, []);
+    const getCodeFromGithub = async (url = `http://192.168.43.201:5000/read-file/Problems/.json`) => {
         // eslint-disable-next-line
         const response = await fetch(url, {
             method: 'GET',
@@ -36,7 +34,7 @@ const Platform = (props) => {
             .then(response => response.json()).then(
                 data => {
                     let response = data;
-                    console.log(response);
+                    // console.log(response);
                     setRsponseFromGithub(JSON.parse(response))
                 }
             )
@@ -77,9 +75,9 @@ const Platform = (props) => {
             )
     }
     const sendCode = () => {
-        console.log(CurrentCode);
+        console.log(CurrentCode+problem_response.test_case);
         setOutput('Running...')
-        codeProcessor('https://anasdew.pythonanywhere.com/execute', CurrentCode)
+        codeProcessor('https://anasdew.pythonanywhere.com/execute', CurrentCode+problem_response.test_case)
     }
     const onChange = React.useCallback((value, viewUpdate) => {
         setCurrentCode(value)
@@ -92,8 +90,8 @@ const Platform = (props) => {
                 Congratulations buddy, you caught the bug!
             </div>
             <div>
-                <h2>{ResponseFromGithub.problem_name}</h2>
-                <p>{ResponseFromGithub.problem_description}</p>
+                <h2>{problem_response.title}</h2>
+                <p>{problem_response.description}</p>
             </div>
 
             <div className='d-flex flex-column '>
@@ -110,7 +108,7 @@ const Platform = (props) => {
                     <button onClick={sendCode} style={{ bottom: '3rem', right: "1rem", position: 'relative' }} type="submit" className=" btn btn-secondary">Run</button>
                     <button onClick={sendCode} style={{ bottom: '3rem', right: "1rem", position: 'relative', marginLeft: "0.5rem" }} type="submit" className="btn btn-success"><Link style={{ color: "white" }} className="text-decoration-none" to={"/success"}>Submit</Link></button>
                 </div>
-                <TestCase />
+                {/* <TestCase /> */}
                 <div style={{ fontFamily: "monospace" }}>
                     Output : {Output}
                 </div>

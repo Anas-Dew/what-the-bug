@@ -1,20 +1,84 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Footer from './Footer'
 import Filters from './platform_components/Filters'
 const ProblemSheet = () => {
+    const [ResponseFromGithub, setResponseFromGithub] = useState([])
+    const [nthProblemDetails, setnthProblemDetails] = useState('')
     // eslint-disable-next-line 
-    const getProblemList = async() => {
+    useEffect(() => {
+        getProblemListFromGithub('http://192.168.43.201:5000/get-all-files')
+        // placeEachProblemOnTable()
+        
+    }, []);
 
+    const getProblemListFromGithub = async (url = `http://192.168.43.201:5000/get-all-files`) => {
+        // eslint-disable-next-line
+        const response = await fetch(url, {
+            method: 'GET',
+            mode: "cors",
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json()).then(
+                data => {
+                    let response = data;
+                    console.log(response.files);
+                    setResponseFromGithub(response.files)
+                    for (const iterator of response.files) {
+                        getProblemDetailsFromGithub(`http://192.168.43.201:5000/read-file/Problems/${iterator}`)
+                    }
+                }
+            )
     }
-    
+
+    const getProblemDetailsFromGithub = async (url = `http://192.168.43.201:5000/read-file/Problems/two_sum.json`) => {
+        // eslint-disable-next-line
+        const response = await fetch(url, {
+            method: 'GET',
+            mode: "cors",
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json()).then(
+                data => {
+                    let response = data;
+                    response = JSON.parse(response)
+                    // console.log(nthProblemDetails);
+                    let problem_table = document.getElementById('problem-body');
+                    const table_row_html_raw = `<tr>
+                    <th scope="row">${0}</th>
+                                        <td><a href='/practice/${response.code_name}'>${response.problem_name}</a></td>
+                                        <td>${response.difficulty}</td>
+                                        <td>${response.tag}</td>
+                                    </tr>`
+                                    console.log(table_row_html_raw);
+                    problem_table.innerHTML += table_row_html_raw
+                }
+            )
+    }
+    // const placeEachProblemOnTable = async () => {
+    //     // getProblemDetailsFromGithub(`http://192.168.43.201:5000/read-file/Problems/two_sum.json`)
+    //     let problem_table = document.getElementById('problem-body');
+    //     const table_row_html_raw = `<tr>
+    //                                     <th scope="row">${0}</th>
+    //                                     <td><Link to={'/practice/${ResponseFromGithub[0]}'}>${nthProblemDetails.problem_name}</Link></td>
+    //                                     <td>${nthProblemDetails.difficulty}</td>
+    //                                     <td>${nthProblemDetails.tag}</td>
+    //                                 </tr>`
+    //     console.log(table_row_html_raw);
+    //     problem_table.innerHTML = + table_row_html_raw
+    // }
+
     return (
         <div className='m-5'>
             <h2>Practice from the problems below.</h2>
             {/* DROP DOWN MENU FOR FILTERS */}
             {/* <Filters/> */}
             <table className="table">
-                <thead style={{backgroundColor: "#ececec"}}>
+                <thead style={{ backgroundColor: "#ececec" }}>
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Problem Name</th>
@@ -22,29 +86,10 @@ const ProblemSheet = () => {
                         <th scope="col">Difficulty</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td><Link to={'/practice/two_sum'}>Two Sum</Link></td>
-                        <td>Array</td>
-                        <td>Easy</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Median of Two Sorted Arrays</td>
-                        <td>Array</td>
-                        <td>Hard</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Longest Palindromic Substring</td>
-                        <td>String</td>
-                        <td>Medium</td>
-                    </tr>
-                </tbody>
+                <tbody id='problem-body'></tbody>
             </table>
 
-            <Footer/>
+            <Footer />
             <button className='btn btn-primary'><Link style={{ color: "white" }} to={"/practice"}>Contribute A Problem</Link></button>
         </div>
     )
