@@ -6,6 +6,7 @@ import { python } from '@codemirror/lang-python';
 import { Buffer } from 'buffer';
 // import { solarizedLight, solarizedDark } from '@uiw/codemirror-theme-solarized';
 const Platform = (props) => {
+    const API_URL = process.env.REACT_APP_API_URL
     const [ResponseFromGithub, setRsponseFromGithub] = useState('')
     const {problem_unique_code} = useParams();
     var navigate = useNavigate();
@@ -20,9 +21,9 @@ const Platform = (props) => {
     const [Output, setOutput] = useState('')
     
     useEffect(() => {
-        getCodeFromGithub(`http://192.168.43.201:5000/read-file/Problems/${problem_unique_code}.json`)
+        getCodeFromGithub(`${API_URL}/read-file/Problems/${problem_unique_code}.json`)
       }, []);
-    const getCodeFromGithub = async (url = `http://192.168.43.201:5000/read-file/Problems/.json`) => {
+    const getCodeFromGithub = async (url = `${API_URL}/read-file/Problems/two_sum.json`) => {
         // eslint-disable-next-line
         const response = await fetch(url, {
             method: 'GET',
@@ -55,7 +56,7 @@ const Platform = (props) => {
             .then(response => response.json()).then(
                 data => {
                     let response = data;
-                    console.log(response);
+                    // console.log(response);
                     if (response['output'] === "The code has bugs.") {
                         setOutput(response['output'])
                     } else {
@@ -75,7 +76,7 @@ const Platform = (props) => {
             )
     }
     const sendCode = () => {
-        console.log(CurrentCode+problem_response.test_case);
+        console.log("Here is the complete code : \n\n\n" + CurrentCode+problem_response.test_case);
         setOutput('Running...')
         codeProcessor('https://anasdew.pythonanywhere.com/execute', CurrentCode+problem_response.test_case)
     }

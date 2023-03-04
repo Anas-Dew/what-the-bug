@@ -8,6 +8,11 @@ import React from 'react'
 import CodePlayground from './components/CodePlayground';
 import NotFound from './components/NotFound'
 function App() {
+  console.log(`I see you...
+  
+  If you would like to work on this project, hit me an email : 4hcblk5g@duck.com 
+  
+  or send me a text on IG@anasunofficial`);
   // const problem_name = "hi"
   return (
     <>

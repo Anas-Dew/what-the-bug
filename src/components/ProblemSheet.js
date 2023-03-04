@@ -3,16 +3,17 @@ import { Link } from 'react-router-dom'
 import Footer from './Footer'
 import Filters from './platform_components/Filters'
 const ProblemSheet = () => {
-    const [ResponseFromGithub, setResponseFromGithub] = useState([])
-    const [nthProblemDetails, setnthProblemDetails] = useState('')
+    const API_URL = process.env.REACT_APP_API_URL
+    // const [ResponseFromGithub, setResponseFromGithub] = useState([])
+    // const [nthProblemDetails, setnthProblemDetails] = useState('')
     // eslint-disable-next-line 
     useEffect(() => {
-        getProblemListFromGithub('http://192.168.43.201:5000/get-all-files')
+        getProblemListFromGithub(`${API_URL}/get-all-files`)
         // placeEachProblemOnTable()
         
     }, []);
 
-    const getProblemListFromGithub = async (url = `http://192.168.43.201:5000/get-all-files`) => {
+    const getProblemListFromGithub = async (url = `${API_URL}/get-all-files`) => {
         // eslint-disable-next-line
         const response = await fetch(url, {
             method: 'GET',
@@ -24,16 +25,16 @@ const ProblemSheet = () => {
             .then(response => response.json()).then(
                 data => {
                     let response = data;
-                    console.log(response.files);
-                    setResponseFromGithub(response.files)
+                    // console.log(response.files);
+                    // setResponseFromGithub(response.files)
                     for (const iterator of response.files) {
-                        getProblemDetailsFromGithub(`http://192.168.43.201:5000/read-file/Problems/${iterator}`)
+                        getProblemDetailsFromGithub(`${API_URL}/read-file/Problems/${iterator}`)
                     }
                 }
             )
     }
 
-    const getProblemDetailsFromGithub = async (url = `http://192.168.43.201:5000/read-file/Problems/two_sum.json`) => {
+    const getProblemDetailsFromGithub = async (url = `${API_URL}/read-file/Problems/two_sum.json`) => {
         // eslint-disable-next-line
         const response = await fetch(url, {
             method: 'GET',
@@ -54,7 +55,7 @@ const ProblemSheet = () => {
                                         <td>${response.difficulty}</td>
                                         <td>${response.tag}</td>
                                     </tr>`
-                                    console.log(table_row_html_raw);
+                                    // console.log(table_row_html_raw);
                     problem_table.innerHTML += table_row_html_raw
                 }
             )
