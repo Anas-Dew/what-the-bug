@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Footer from './Footer'
-import Filters from './platform_components/Filters'
+import Loading from './Loading'
+
 const ProblemSheet = () => {
     const API_URL = process.env.REACT_APP_API_URL
-    // const [ResponseFromGithub, setResponseFromGithub] = useState([])
-    // const [nthProblemDetails, setnthProblemDetails] = useState('')
+
     // eslint-disable-next-line 
     useEffect(() => {
         getProblemListFromGithub(`${API_URL}/get-all-files`)
         // placeEachProblemOnTable()
-        
+
     }, []);
 
     const getProblemListFromGithub = async (url = `${API_URL}/get-all-files`) => {
@@ -47,15 +47,16 @@ const ProblemSheet = () => {
                 data => {
                     let response = data;
                     response = JSON.parse(response)
-                    // console.log(nthProblemDetails);
+    
                     let problem_table = document.getElementById('problem-body');
                     const table_row_html_raw = `<tr>
-                    <th scope="row">${0}</th>
+                            <th scope="row">0</th>
                                         <td><a href='/practice/${response.code_name}'>${response.problem_name}</a></td>
-                                        <td>${response.difficulty}</td>
                                         <td>${response.tag}</td>
+                                        <td>${response.difficulty}</td>
                                     </tr>`
-                                    // console.log(table_row_html_raw);
+            
+                    document.getElementById('loading').style.display = "none"
                     problem_table.innerHTML += table_row_html_raw
                 }
             )
@@ -74,7 +75,7 @@ const ProblemSheet = () => {
     // }
 
     return (
-        <div className='m-5'>
+        <div className='m-5 d-flex flex-column'>
             <h2>Practice from the problems below.</h2>
             {/* DROP DOWN MENU FOR FILTERS */}
             {/* <Filters/> */}
@@ -90,8 +91,9 @@ const ProblemSheet = () => {
                 <tbody id='problem-body'></tbody>
             </table>
 
+            <Loading />
             <Footer />
-            <button className='btn btn-primary'><Link style={{ color: "white" }} to={"/practice"}>Contribute A Problem</Link></button>
+            <button style={{display: "none"}} className='btn btn-primary'><Link style={{ color: "white" }} to={"/practice"}>Contribute A Problem</Link></button>
         </div>
     )
 }

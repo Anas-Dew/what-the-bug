@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 const CodePlayground = () => {
     const [Output, setOutput] = useState('')
-    const [CurrentCode, setCurrentCode] = useState('print("Hello from WhatTheBug")')
+    const [CurrentCode, setCurrentCode] = useState('print("Hello from WhatTheBug") \n# Run anything you want.')
 
     const codeProcessor = async (url = 'https://anasdew.pythonanywhere.com/execute', code) => {
         // eslint-disable-next-line
@@ -68,7 +68,7 @@ const CodePlayground = () => {
                 <button onClick={sendCode} style={{ bottom: '3rem', right: "1rem", position: 'relative' }} type="submit" className=" btn btn-success">Run</button>
                 {/* <button style={{ bottom: '3rem', right: "1rem", position: 'relative', marginLeft: "0.5rem" }} type="submit" className="btn btn-success"><Link style={{ color: "white" }} className="text-decoration-none" to={"/success"}>Submit</Link></button> */}
             </div>
-            <div style={{ fontFamily: "monospace" }}>
+            <div className='mb-5' id='output-panel'>
                 Output : {Output}
             </div>
         </div>

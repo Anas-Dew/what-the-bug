@@ -106,12 +106,12 @@ const Platform = (props) => {
                 // onBeforeChange={onBeforeChange}
                 />
                 <div className='d-flex align-self-end'>
-                    <button onClick={sendCode} style={{ bottom: '3rem', right: "1rem", position: 'relative' }} type="submit" className=" btn btn-secondary">Run</button>
-                    <button onClick={sendCode} style={{ bottom: '3rem', right: "1rem", position: 'relative', marginLeft: "0.5rem" }} type="submit" className="btn btn-success"><Link style={{ color: "white" }} className="text-decoration-none" to={"/success"}>Submit</Link></button>
+                    <button onClick={sendCode} style={{ bottom: '3rem', right: "1rem", position: 'relative' }} type="submit" className=" btn btn-success">Run</button>
+                    {/* <button onClick={sendCode} style={{ bottom: '3rem', right: "1rem", position: 'relative', marginLeft: "0.5rem" }} type="submit" className="btn btn-success"><Link style={{ color: "white" }} className="text-decoration-none" to={"/success"}>Submit</Link></button> */}
                 </div>
                 {/* <TestCase /> */}
-                <div style={{ fontFamily: "monospace" }}>
-                    Output : {Output}
+                <div className='mb-5' id='output-panel'>
+                    Result : {Output}
                 </div>
             </div>
         </div>

@@ -19,9 +19,9 @@ const Navbar = () => {
                         <li className="nav-item">
                             <Link className="nav-link" target={"_blank"} to="https://tally.so/r/nPpOa1">Feedback</Link>
                         </li>
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <Link className="nav-link" to="#">Join WhatTheBug</Link>
-                        </li>
+                        </li> */}
                     </ul>                  
                 </div>
 
