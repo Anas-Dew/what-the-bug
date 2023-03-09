@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 const CodePlayground = () => {
     const [Output, setOutput] = useState('')
-    const [CurrentCode, setCurrentCode] = useState('print("Hello from WhatTheBug") \n# Run anything you want.')
+    const [CurrentCode, setCurrentCode] = useState('# Run anything you want. \nprint("Hello from WTB")')
 
     const codeProcessor = async (url = 'https://anasdew.pythonanywhere.com/execute', code) => {
         // eslint-disable-next-line
@@ -29,17 +29,6 @@ const CodePlayground = () => {
                         let newOutput = response['output'].toString().slice(2, -1).replace(/\\n/g, "\n")
                         setOutput(newOutput)
                     }
-
-                    // ON PASS, REDIRECT.
-                    // const lol = newOutput.replace(/\s+/g, "").toLowerCase()
-                    // if (lol === "pass") {
-                        // document.getElementById('success-alert').style.display = "block"
-                    //     setTimeout(() => {
-                    //         navigate('/success')
-                    //     }, 3000)
-                    // } else {
-
-                    // }
                 }
             )
     }

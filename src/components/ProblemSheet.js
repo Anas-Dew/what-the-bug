@@ -81,7 +81,7 @@ const ProblemSheet = () => {
             <h2>Practice from the problems below.</h2>
             {/* DROP DOWN MENU FOR FILTERS */}
             {/* <Filters/> */}
-            <table className="table">
+            <table className="table bg-light">
                 <thead style={{ backgroundColor: "#ececec" }}>
                     <tr>
                         <th scope="col">#</th>
