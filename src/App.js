@@ -7,10 +7,11 @@ import Success from './components/Success';
 import React from 'react'
 import CodePlayground from './components/CodePlayground';
 import NotFound from './components/NotFound'
+import Alert from './components/Alert';
 function App() {
-  console.log(`I see you...
+  console.log(`I see you... \n
   
-  If you would like to work on this project, hit me an email : 4hcblk5g@duck.com 
+  If you would like to work on this project, hit me an email : 4hcblk5g@duck.com \n
   
   or send me a text on IG@anasunofficial`);
   // const problem_name = "hi"
@@ -18,6 +19,7 @@ function App() {
     <>
       <Router>
         <Navbar />
+        <Alert/>
         <Routes>
           <Route path='*' element={<NotFound />} />
           <Route exact path='/' element={<ProblemSheet />} />

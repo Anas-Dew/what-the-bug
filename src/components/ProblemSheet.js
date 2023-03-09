@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import FirstTour from './FirstTour'
 import Footer from './Footer'
 import Loading from './Loading'
 
@@ -76,6 +77,7 @@ const ProblemSheet = () => {
 
     return (
         <div className='m-5 d-flex flex-column'>
+            <FirstTour/>
             <h2>Practice from the problems below.</h2>
             {/* DROP DOWN MENU FOR FILTERS */}
             {/* <Filters/> */}
