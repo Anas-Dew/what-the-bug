@@ -4,10 +4,10 @@ import Navbar from './components/Navbar';
 import Platform from './components/Platform';
 import ProblemSheet from './components/ProblemSheet';
 import Success from './components/Success';
-import React, { useRef, useEffect } from 'react'
+import React from 'react'
 import CodePlayground from './components/CodePlayground';
 import NotFound from './components/NotFound'
-import Alert from './components/Alert';
+import Footer from './components/Footer'
 // import Matrix from './theme_src/matrix.mp4'
 
 function App() {
@@ -28,7 +28,7 @@ function App() {
             </video>
           </div> */}
           <Navbar />
-          <Alert />
+          {/* <Alert /> */}
           <Routes>
             <Route path='*' element={<NotFound />} />
             <Route exact path='/' element={<ProblemSheet />} />
@@ -36,6 +36,7 @@ function App() {
             <Route exact path='/success' element={<Success />} />
             <Route exact path='/playground' element={<CodePlayground />} />
           </Routes>
+          <Footer/>
         </Router>
       </>
     );

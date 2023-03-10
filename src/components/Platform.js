@@ -65,6 +65,7 @@ const Platform = (props) => {
                         const lol = newOutput.replace(/\s+/g, "").toLowerCase()
                         if (lol === "pass") {
                             document.getElementById('success-alert').style.display = "block"
+                            localStorage.setItem('catch-count', parseInt(localStorage.getItem('catch-count')) + 1 || 0)
                             setTimeout(() => {
                                 navigate('/success')
                             }, 3000)

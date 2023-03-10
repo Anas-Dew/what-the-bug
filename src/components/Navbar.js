@@ -16,13 +16,16 @@ const Navbar = () => {
                         <li className="nav-item">
                             <Link className="nav-link " to="/playground">Playground</Link>
                         </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" target={"_blank"} to="https://tally.so/r/nPpOa1">Feedback</Link>
-                        </li>
                         {/* <li className="nav-item">
-                            <Link className="nav-link" to="#">Join WhatTheBug</Link>
+                            <Link className="nav-link" target={"_blank"} to="https://tally.so/r/nPpOa1">Feedback</Link>
                         </li> */}
-                    </ul>                  
+                        <li className="nav-item">
+                            <Link onClick={() => { navigator.clipboard.writeText("Hey look, \n\nI found this platform where I am shaping my debugging skills. \nJoin me! : https://wtb.anasdew.tech/").then(function () { alert('Copied to clipboard!'); }, function () { }); }} className="nav-link" to="#">invite Your Friend</Link>
+                        </li>
+                    </ul>
+                    <div>
+                        Catches : {localStorage.getItem('catch-count') || 0}
+                    </div>
                 </div>
 
             </div>
