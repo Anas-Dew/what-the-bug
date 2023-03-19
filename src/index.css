@@ -77,6 +77,7 @@ h1, h2, h3, h4, h5, h6 {
 #output-panel {
   padding: 1rem;
   border-radius: 5px;
-  background-color: rgb(231, 231, 231) !important;
+  background-color: #343434 !important;
   box-shadow: 0px 17px 29px 5px rgba(0,0,5,0.1);
+  color: #dddddd;
 }

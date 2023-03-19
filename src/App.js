@@ -8,38 +8,37 @@ import React from 'react'
 import CodePlayground from './components/CodePlayground';
 import NotFound from './components/NotFound'
 import Footer from './components/Footer'
-// import Matrix from './theme_src/matrix.mp4'
+import { useState, useEffect } from 'react';
+import FullscreenLoader from './components/key_components/Loader';
 
 function App() {
-  // const videoRef = useRef(null);
-    return (
-      <>
-        <Router>
-          {/* <div className="video-container" id='myVideo'>
-            <video
-              ref={videoRef}
-              autoPlay
-              muted
-              loop
-              style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
-            >
-              <source src={Matrix} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div> */}
-          <Navbar />
-          {/* <Alert /> */}
-          <Routes>
-            <Route path='*' element={<NotFound />} />
-            <Route exact path='/' element={<ProblemSheet />} />
-            <Route exact path={`/practice/:problem_unique_code`} element={<Platform />} />
-            <Route exact path='/success' element={<Success />} />
-            <Route exact path='/playground' element={<CodePlayground />} />
-          </Routes>
-          <Footer/>
-        </Router>
-      </>
-    );
-  }
+  const [loading, setLoading] = useState(false);
 
-  export default App;
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 3000);
+  // }, []);
+
+
+  return (
+    <div>
+      {loading ? <FullscreenLoader /> :
+        <div className='bg-dark'>
+          <Router>
+            <Navbar text_color={'#dddddd'} background_color={'#343434'} />
+            <Routes>
+              <Route path='*' element={<NotFound />} />
+              <Route exact path='/' element={<ProblemSheet text_color={'#dddddd'} />} />
+              <Route exact path={`/practice/:problem_unique_code`} element={<Platform text_color={'#dddddd'} />} />
+              <Route exact path='/success' element={<Success />} />
+              <Route exact path='/playground' element={<CodePlayground />} />
+            </Routes>
+            <Footer text_color={'#dddddd'} />
+          </Router>
+        </div>}
+    </div>
+  );
+}
+
+export default App;

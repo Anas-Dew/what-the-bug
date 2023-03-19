@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import FirstTour from './FirstTour'
 import Loading from './Loading'
 
-const ProblemSheet = () => {
+const ProblemSheet = (props) => {
     const API_URL = process.env.REACT_APP_API_URL
 
     // eslint-disable-next-line 
@@ -43,7 +43,7 @@ const ProblemSheet = () => {
                 data => {
                     let response = data;
                     response = JSON.parse(response)
-    
+
                     let problem_table = document.getElementById('problem-body');
                     const table_row_html_raw = `<tr>
                             <th scope="row">0</th>
@@ -52,7 +52,7 @@ const ProblemSheet = () => {
                                         <td>${response.tag}</td>
                                         <td>${response.difficulty}</td>
                                     </tr>`
-            
+
                     document.getElementById('loading').style.display = "none"
                     problem_table.innerHTML += table_row_html_raw
                 }
@@ -61,13 +61,13 @@ const ProblemSheet = () => {
 
     return (
         <div className='m-5 d-flex flex-column'>
-            <FirstTour/>
-            <h2>Practice from the problems below.</h2>
+            <FirstTour />
+            <h2 style={{color: `${props.text_color}`}}>Practice from the problems below.</h2>
             {/* DROP DOWN MENU FOR FILTERS */}
             {/* <Filters/> */}
-            <table className="table bg-light">
+            <table className="table bg-dark">
                 <thead style={{ backgroundColor: "#ececec" }}>
-                    <tr>
+                    <tr className="bg-dark text-light">
                         <th scope="col">#</th>
                         <th scope="col">Problem Name</th>
                         <th scope="col">Status</th>
@@ -75,11 +75,11 @@ const ProblemSheet = () => {
                         <th scope="col">Difficulty</th>
                     </tr>
                 </thead>
-                <tbody id='problem-body'></tbody>
+                <tbody className="bg-dark text-light" id='problem-body'></tbody>
             </table>
 
             <Loading />
-            <button style={{display: "none"}} className='btn btn-primary'><Link style={{ color: "white" }} to={"/practice"}>Contribute A Problem</Link></button>
+            <button style={{ width: "12rem" }} className='btn btn-primary'><Link style={{ color: "white" }} to={"https://forms.gle/mXteKaSkMoRQGLRw6"}>Contribute A Problem</Link></button>
         </div>
     )
 }

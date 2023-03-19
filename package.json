@@ -4,9 +4,11 @@
   "private": true,
   "dependencies": {
     "@codemirror/lang-python": "^6.1.1",
+    "@emotion/react": "^11.10.6",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@uiw/codemirror-theme-dracula": "^4.19.9",
     "@uiw/codemirror-theme-solarized": "^4.19.9",
     "@uiw/react-codemirror": "^4.19.9",
     "buffer": "^6.0.3",

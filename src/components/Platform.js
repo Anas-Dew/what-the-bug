@@ -1,16 +1,19 @@
 import React from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { python } from '@codemirror/lang-python';
 import { Buffer } from 'buffer';
-// import { solarizedLight, solarizedDark } from '@uiw/codemirror-theme-solarized';
+import { solarizedLight, solarizedDark } from '@uiw/codemirror-theme-solarized';
+import { dracula, draculaInit } from '@uiw/codemirror-theme-dracula';
+import { tags as t } from '@lezer/highlight';
+
 const Platform = (props) => {
     const API_URL = process.env.REACT_APP_API_URL
     const [ResponseFromGithub, setRsponseFromGithub] = useState('')
-    const {problem_unique_code} = useParams();
+    const { problem_unique_code } = useParams();
     var navigate = useNavigate();
- 
+
     let problem_response = {
         "title": ResponseFromGithub.problem_name || 'Foo Bar',
         "description": ResponseFromGithub.problem_description || 'Lots of foo and lots of bar....',
@@ -19,10 +22,10 @@ const Platform = (props) => {
     }
     const [CurrentCode, setCurrentCode] = useState(problem_response.bug_code)
     const [Output, setOutput] = useState('')
-    
+
     useEffect(() => {
         getCodeFromGithub(`${API_URL}/read-file/Problems/${problem_unique_code}.json`)
-      }, []);
+    }, []);
     const getCodeFromGithub = async (url = `${API_URL}/read-file/Problems/two_sum.json`) => {
         // eslint-disable-next-line
         const response = await fetch(url, {
@@ -65,7 +68,6 @@ const Platform = (props) => {
                         const lol = newOutput.replace(/\s+/g, "").toLowerCase()
                         if (lol === "pass") {
                             document.getElementById('success-alert').style.display = "block"
-                            localStorage.setItem('catch-count', parseInt(localStorage.getItem('catch-count')) + 1 || 0)
                             setTimeout(() => {
                                 navigate('/success')
                             }, 3000)
@@ -77,9 +79,9 @@ const Platform = (props) => {
             )
     }
     const sendCode = () => {
-        console.log("Here is the complete code : \n\n\n" + CurrentCode+problem_response.test_case);
+        console.log("Here is the complete code : \n\n\n" + CurrentCode + problem_response.test_case);
         setOutput('Running...')
-        codeProcessor('https://anasdew.pythonanywhere.com/execute', CurrentCode+problem_response.test_case)
+        codeProcessor('https://anasdew.pythonanywhere.com/execute', CurrentCode + problem_response.test_case)
     }
     const onChange = React.useCallback((value, viewUpdate) => {
         setCurrentCode(value)
@@ -92,8 +94,8 @@ const Platform = (props) => {
                 Congratulations buddy, you caught the bug!
             </div>
             <div>
-                <h2>{problem_response.title}</h2>
-                <p>{problem_response.description}</p>
+                <h2 style={{ color: `${props.text_color}` }}>{problem_response.title}</h2>
+                <p style={{ color: `${props.text_color}` }}>{problem_response.description}</p>
             </div>
 
             <div className='d-flex flex-column '>
@@ -102,12 +104,20 @@ const Platform = (props) => {
                     height="20rem"
                     extensions={[python()]}
                     onChange={onChange}
-                    // theme={solarizedLight}
+                    theme={draculaInit({
+                        settings: {
+                            caret: '#c6c6c6',
+                            fontFamily: 'monospace',
+                        },
+                        styles: [
+                            { tag: t.comment, color: '#6272a4' },
+                        ]
+                    })}
                     id="code-view"
                 // onBeforeChange={onBeforeChange}
                 />
                 <div className='d-flex align-self-end'>
-                    <button onClick={sendCode} style={{ bottom: '3rem', right: "1rem", position: 'relative' }} type="submit" className=" btn btn-success">Run</button>
+                    <button onClick={sendCode} style={{ bottom: '3rem', right: "1rem", position: 'relative' }} type="submit" className=" btn btn-success">Submit</button>
                     {/* <button onClick={sendCode} style={{ bottom: '3rem', right: "1rem", position: 'relative', marginLeft: "0.5rem" }} type="submit" className="btn btn-success"><Link style={{ color: "white" }} className="text-decoration-none" to={"/success"}>Submit</Link></button> */}
                 </div>
                 {/* <TestCase /> */}

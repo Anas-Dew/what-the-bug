@@ -2,7 +2,8 @@ import React from 'react'
 import CodeMirror from '@uiw/react-codemirror';
 import { python } from '@codemirror/lang-python';
 import { useState } from 'react';
-
+import { tags as t } from '@lezer/highlight';
+import { dracula, draculaInit } from '@uiw/codemirror-theme-dracula';
 const CodePlayground = () => {
     const [Output, setOutput] = useState('')
     const [CurrentCode, setCurrentCode] = useState('# Run anything you want. \nprint("Hello from WTB")')
@@ -49,7 +50,15 @@ const CodePlayground = () => {
                 height="20rem"
                 extensions={[python()]}
                 onChange={onChange}
-                // theme={solarizedLight}
+                theme={draculaInit({
+                    settings: {
+                        caret: '#c6c6c6',
+                        fontFamily: 'monospace',
+                    },
+                    styles: [
+                        { tag: t.comment, color: '#6272a4' },
+                    ]
+                })}
                 id="code-view"
             // onBeforeChange={onBeforeChange}
             />
