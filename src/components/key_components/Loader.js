@@ -10,8 +10,8 @@ const override = css`
 const FullscreenLoader = () => {
   return (
     <div className="fullscreen-loader">
-      <div css={override} size={150} color={'#123abc'}>
-        Hang tight!
+      <div css={override} size={150} style={{color: "white", margin: "2rem"}}>
+        Hang tight! We're in Alpha Mode.
       </div>
     </div>
   );

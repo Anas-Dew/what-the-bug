@@ -17,7 +17,7 @@ const Navbar = (props) => {
                             <Link style={{color: `${props.text_color}`}} className="nav-link " to="/playground">Playground</Link>
                         </li>
                         <li className="nav-item">
-                            <Link style={{color: `${props.text_color}`}} onClick={() => { navigator.clipboard.writeText("Hey look, \n\nI found this platform where I am shaping my debugging skills. \nJoin me! : https://wtb.anasdew.tech/").then(function () { alert('Share it on Whatsapp, Facebook etc.!'); }, function () { }); }} className="nav-link" to="#">invite Your Friend</Link>
+                            <Link style={{color: `${props.text_color}`}} onClick={() => { navigator.clipboard.writeText("Hey look, \n\nI found this platform where I am shaping my debugging skills. \nJoin me! : https://wtb.anasdew.tech/").then(function () { alert('Share it on Whatsapp, Facebook etc.!'); }, function () { }); }} className="nav-link" to="#">Invite Your Friend</Link>
                         </li>
                     </ul>
                 </div>

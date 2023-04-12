@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from github import Github
 import base64
 from flask_cors import CORS
@@ -36,6 +36,18 @@ def read_file(folder, file_name):
     # INSERT TRY EXCEPT BLOCK HERE BEFORE RUNNING ON PRODUCTION.
 
     return jsonify(decoded_string)
+
+
+@app.route('/add-json-file', methods=['POST'])
+def add_json_file():
+    # Get the request data
+    file_name = request.json['file_name']
+    file_contents = request.json['file_contents']
+
+    # Create the file
+    repo.create_file(f"Problems/{file_name}", "Adding a new JSON file", file_contents)
+
+    return jsonify({"message": "File added successfully"})
 
 
 if __name__ == "__main__":

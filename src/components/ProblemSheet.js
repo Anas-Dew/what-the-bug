@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import FirstTour from './FirstTour'
 import Loading from './Loading'
+import SearchAndSort from './key_components/SearchAndSort'
+import PaginationBottom from './key_components/PaginationBottom'
 
 const ProblemSheet = (props) => {
     const API_URL = process.env.REACT_APP_API_URL
@@ -47,10 +49,10 @@ const ProblemSheet = (props) => {
                     let problem_table = document.getElementById('problem-body');
                     const table_row_html_raw = `<tr>
                             <th scope="row">0</th>
-                                        <td><a href='/practice/${response.code_name}'>${response.problem_name}</a></td>
-                                        <td>${'Not Attemped'}</td>
-                                        <td>${response.tag}</td>
+                                        <td><a style="text-decoration: none;color: white;" href='/practice/${response.code_name}'>${response.problem_name}</a></td>
                                         <td>${response.difficulty}</td>
+                                        <td>${response.tag}</td>
+                                        <td>${'Not Attemped'}</td>
                                     </tr>`
 
                     document.getElementById('loading').style.display = "none"
@@ -61,25 +63,28 @@ const ProblemSheet = (props) => {
 
     return (
         <div className='m-5 d-flex flex-column'>
-            <FirstTour />
-            <h2 style={{color: `${props.text_color}`}}>Practice from the problems below.</h2>
+            <div className='d-flex justify-content-between align-content-center m-1'>
+                <h2 style={{ color: `${props.text_color}` }}>PRACTICE FROM THE PROBLEMS BELOW</h2>
+                <FirstTour />
+            </div>
             {/* DROP DOWN MENU FOR FILTERS */}
-            {/* <Filters/> */}
-            <table className="table bg-dark">
-                <thead style={{ backgroundColor: "#ececec" }}>
-                    <tr className="bg-dark text-light">
+            <SearchAndSort />
+            <table className="table m-0 text-white">
+                <thead style={{ backgroundColor: "#33404C", color: "white" }}>
+                    <tr className="">
                         <th scope="col">#</th>
                         <th scope="col">Problem Name</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Tag</th>
                         <th scope="col">Difficulty</th>
+                        <th scope="col">Tag</th>
+                        <th scope="col">Status</th>
                     </tr>
                 </thead>
-                <tbody className="bg-dark text-light" id='problem-body'></tbody>
+                <tbody style={{ background: "#33404C" }} className="" id='problem-body'></tbody>
             </table>
-
             <Loading />
-            <button style={{ width: "12rem" }} className='btn btn-primary'><Link style={{ color: "white" }} to={"https://forms.gle/mXteKaSkMoRQGLRw6"}>Contribute A Problem</Link></button>
+            <PaginationBottom />
+
+            <button id='contribute-button' className='btn btn-primary'><Link style={{ color: "white" }} to={"https://forms.gle/mXteKaSkMoRQGLRw6"}>+ Contribute a problem</Link></button>
         </div>
     )
 }

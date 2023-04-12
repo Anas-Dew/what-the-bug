@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -7,6 +9,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* font-family: "Labrada"; */
+  background: #1E2934;
+  font-family: 'Share Tech Mono', monospace;
 }
 
 .center {
@@ -15,18 +19,39 @@ body {
 }
 
 #hero-heading {
-  font-family: 'Times New Roman', Times, serif;
+  /* font-family: 'Times New Roman', Times, serif; */
+  font-family: 'Share Tech Mono', monospace;
 
 }
-h1, h2, h3, h4, h5, h6 {
-  /* font-family: 'Righteous'; */
-  font-family: 'Times New Roman', Times, serif;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Share Tech Mono', monospace;
+  color: #dddddd;
+}
+ 
+p {
+  color: #dddddd;
 }
 
 .filter-buttons {
   margin: 1rem;
 }
 
+#contribute-button {
+  width: 14rem;
+  display: flex;
+  align-self: center;
+  margin-top: 1.5rem;
+}
+
+#contribute-button>a {
+  text-decoration: none;
+}
 
 /* NOT FOUND PAGE CONTENT */
 #not-found-paragraph {
@@ -41,7 +66,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* # TEST CASES */
-#test-case-button-div > button{
+#test-case-button-div>button {
   border: 0;
   margin-left: 1rem;
   border-radius: 10px;
@@ -53,14 +78,18 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
- /* # MISC */
- .test_button:hover {
+/* # MISC */
+.test_button:hover {
   color: white;
-  display: inline-block; /* Inline elements with width and height. TL;DR they make the icon buttons stack from left-to-right instead of top-to-bottom */
-  position: relative; /* All 'absolute'ly positioned elements are relative to this one */
-  padding: 2px 5px; /* Add some padding so it looks nice */
+  display: inline-block;
+  /* Inline elements with width and height. TL;DR they make the icon buttons stack from left-to-right instead of top-to-bottom */
+  position: relative;
+  /* All 'absolute'ly positioned elements are relative to this one */
+  padding: 2px 5px;
+  /* Add some padding so it looks nice */
 }
- /* Make the badge float in the top right corner of the button */
+
+/* Make the badge float in the top right corner of the button */
 .button__badge {
   background-color: #d1d1d1;
   border-radius: 10px;
@@ -68,8 +97,9 @@ h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
   padding: 1px 5px;
   font-size: 13px;
-  
-  position: absolute; /* Position the badge within the relatively positioned button */
+
+  position: absolute;
+  /* Position the badge within the relatively positioned button */
   top: 0;
   right: 0;
 }
@@ -78,6 +108,6 @@ h1, h2, h3, h4, h5, h6 {
   padding: 1rem;
   border-radius: 5px;
   background-color: #343434 !important;
-  box-shadow: 0px 17px 29px 5px rgba(0,0,5,0.1);
+  box-shadow: 0px 17px 29px 5px rgba(0, 0, 5, 0.1);
   color: #dddddd;
 }

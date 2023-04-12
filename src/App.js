@@ -10,31 +10,34 @@ import NotFound from './components/NotFound'
 import Footer from './components/Footer'
 import { useState, useEffect } from 'react';
 import FullscreenLoader from './components/key_components/Loader';
+import Form from './Admin/Form';
 
 function App() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //   }, 3000);
-  // }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+  }, []);
 
 
   return (
     <div>
       {loading ? <FullscreenLoader /> :
-        <div className='bg-dark'>
+        <div>
           <Router>
-            <Navbar text_color={'#dddddd'} background_color={'#343434'} />
+            <Navbar text_color={'#dddddd'} background_color={'#171f27'} />
+            {/* <Navbar/> */}
             <Routes>
               <Route path='*' element={<NotFound />} />
               <Route exact path='/' element={<ProblemSheet text_color={'#dddddd'} />} />
-              <Route exact path={`/practice/:problem_unique_code`} element={<Platform text_color={'#dddddd'} />} />
+              <Route exact path={`/practice/:problem_unique_code`} element={<Platform />} />
               <Route exact path='/success' element={<Success />} />
               <Route exact path='/playground' element={<CodePlayground />} />
+              <Route exact path='/post' element={<Form />} />
             </Routes>
-            <Footer text_color={'#dddddd'} />
+            <Footer text_color={"#dddddd"} />
           </Router>
         </div>}
     </div>
