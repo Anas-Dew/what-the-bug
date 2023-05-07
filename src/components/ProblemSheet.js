@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import FirstTour from './FirstTour'
 import Loading from './Loading'
 import SearchAndSort from './key_components/SearchAndSort'
@@ -7,9 +7,13 @@ import PaginationBottom from './key_components/PaginationBottom'
 
 const ProblemSheet = (props) => {
     const API_URL = process.env.REACT_APP_API_URL
-
+    const navigate = useNavigate()
     // eslint-disable-next-line 
     useEffect(() => {
+        if (process.env.NODE_ENV === 'production') {
+            navigate("/playground")
+            
+        }
         getProblemListFromGithub(`${API_URL}/get-all-files`)
     }, []);
 

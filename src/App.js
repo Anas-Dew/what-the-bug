@@ -13,7 +13,7 @@ import FullscreenLoader from './components/key_components/Loader';
 import Form from './Admin/Form';
 
 function App() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false); // set to true
 
   useEffect(() => {
     setTimeout(() => {

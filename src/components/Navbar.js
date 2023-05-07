@@ -21,7 +21,11 @@ const Navbar = (props) => {
                         </li>
                     </ul>
                 </div>
-
+                {/* <div style={{marginRight: "1rem"}} className="d-flex">
+                    <p>Coins : 1</p>
+                    <p style={{marginLeft: "1rem"}}>Streak : 5</p>
+                    <Link style={{color: `${props.text_color}`, marginLeft: "1rem"}} className="nav-link " to="/profile">Profile</Link>
+                </div> */}
             </div>
         </nav>
     )
